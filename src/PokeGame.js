@@ -39,30 +39,26 @@ const pokemons = [
     { id: 133, name: 'Eevee', type: 'normal', base_experience: 65 },
 ];
 
-function checkWinner(groups) {
-    let sum0 = 0;
-    let sum1 = 0;
-    groups[0].map((i) => (sum0 += i.base_experience));
-    groups[1].map((i) => (sum1 += i.base_experience));
-    return [sum0, sum1];
-}
-
 class PokeGame extends React.Component {
     render() {
         const groups = selectGroups(pokemons);
-        const scores = checkWinner(groups);
-
-        const winnerHeader = <h2 className="title win">Winning Hand</h2>;
-        const loserHeader = <h2 className="title lose">Losing Hand</h2>;
+        let sum0 = 0;
+        let sum1 = 0;
+        groups[0].map((i) => (sum0 += i.base_experience));
+        groups[1].map((i) => (sum1 += i.base_experience));
 
         return (
             <div>
-                {scores[0] > scores[1] ? winnerHeader : loserHeader}
-                <p>Total experience: {scores[0]}</p>
-                <Pokedex cards={groups[0]} />
-                {scores[0] > scores[1] ? loserHeader : winnerHeader}
-                <p>Total experience: {scores[1]}</p>
-                <Pokedex cards={groups[1]} />
+                <Pokedex
+                    cards={groups[0]}
+                    totalExp={sum0}
+                    isWinner={sum0 > sum1}
+                />
+                <Pokedex
+                    cards={groups[1]}
+                    totalExp={sum1}
+                    isWinner={!(sum0 > sum1)}
+                />
             </div>
         );
     }

@@ -1,7 +1,22 @@
-.Pokedex {
+.Pokedex-title {
+    font-size: 24px;
+    font-weight: 700;
+}
+
+.Pokedex-body {
     display: grid;
     grid-template-columns: repeat(4, 300px);
     justify-content: center;
     align-items: space;
     max-width: 100%;
+}
+
+.win {
+    color: green;
+    text-shadow: 1px 1px 25px white;
+}
+
+.lose {
+    color: red;
+    text-shadow: 1px 1px 25px white;
 }
